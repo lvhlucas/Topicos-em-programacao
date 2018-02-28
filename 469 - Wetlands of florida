@@ -1,0 +1,55 @@
+‘’’
+a função bfs busca em uma matriz todos os pontos não conectados ao conjunto, iniciando pelo ponto x,y.
+caso o ponto atual esteja no dicionário que contém os pontos já visitados ele retorna o resultado.
+caso não esteja é pego então o ponto inicial e é adicionado em fila, todos os pontos adjacentes a ele, caso sejam os casos de busca(‘w’ water).
+ao final mostra na tela o tamanho da nascente.
+’’’
+def bfs(x,y,matriz,dic):
+	for i in dic:
+    	if [x,y] in i:
+
+        	return print(i[-1])
+	qtd=0
+	fila=[[x,y]]
+	visitado=[]
+
+	while len(fila)!=0:
+    	linha=fila[0][0]
+    	coluna=fila[0][1]
+    	del fila[0]
+    	visitado.append([linha,coluna])
+    	qtd+=1
+    	for i in [-1,0,1]:
+        	for j in [-1,0,1]:
+            	if linha+i>=0 and linha+i<len(matriz) and coluna+j>=0 and coluna+j<len(matriz[0]) and matriz[linha+i][coluna+j]=='W':
+                	if [linha+i,coluna+j] not in fila and [linha+i,coluna+j] not in visitado:
+                    	fila.append([linha+i,coluna+j])
+	visitado.append(qtd)
+	dic.append(visitado)
+	print(qtd)
+
+
+
+‘’’
+o programa em si, isto é lê os dados que são informados a função acima.
+‘’’
+primeiraLinha=int(input())
+input()
+for i in range(primeiraLinha):
+	dicBusca=[]
+	matriz=[]
+	linha=list(input())
+	while linha[0]=='L' or linha[0]=='W':
+    	matriz.append(list(linha))
+    	linha=input()
+
+
+	linha=linha.split()
+	while len(linha)!=0:
+    	bfs(int(linha[0])-1,int(linha[1])-1,matriz,dicBusca)
+    	try:
+        	linha=input().split()
+    	except:
+        	break
+    	#rint(linha)
+	print()
