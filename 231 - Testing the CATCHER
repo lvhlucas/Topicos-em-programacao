@@ -1,0 +1,34 @@
+‘’’
+listaAltura contém um vetor com a altura de todos os mísseis.
+é pego altura do mísseis e adicionado na listaAltura em seguida é verificado se a altura do ultimo mísseis adicionada é maior que a posição anterior.
+enquanto for maior aux_posicao vai diminuido com isso procurando um valor que seja maior que a altura do míssil.
+é pego a contagem do destruição do missil de altura maior que o atual é adicionada na lista destroi com mais um.
+se o valor de destroi que foi adicionado for maior que o máximo até o momento a varvel maximo é atualizado contendo o numero de misseis abatidos.
+ao final é mostrado a quantidade de misseis abatidos.
+‘’’
+altura=int(input())
+contador=0
+while altura!=-1:
+	listaAltura=[]
+	destroi=[]
+	contador+=1
+	posicao=1
+	maximo=0
+	listaAltura.append(99999)
+	destroi.append(0)
+	while altura!=-1:
+		aux_posicao=posicao-1
+		listaAltura.append(altura)
+		while altura>listaAltura[aux_posicao]:
+			aux_posicao-=1
+		destroi.append(destroi[aux_posicao]+1)
+		if destroi[posicao]>maximo:
+			maximo=destroi[posicao]
+		posicao+=1
+		altura=int(input())
+	#print(listaAltura)
+	#print(destroi)
+	print()
+	print('Test #%d:'%contador)
+	print('  maximum possible interceptions: %d'  %maximo)
+	altura=int(input())
