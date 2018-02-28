@@ -1,0 +1,44 @@
+‘’’funciona mas o uva não aceita
+ alguns exemplos do uva estão errados
+‘’’
+linha =input().replace(';',' ').replace('.',' ').split()
+while linha[0]!='#':
+‘’’
+grafh contém o labirinto
+teseu guarda aonde o heroi está
+minotauro possui as cavernas onde o minotauro pode ir
+minotauroEsta diz onde está o monstro.
+‘’’
+	grafh={}
+	for i in linha[:-3]:
+		grafh[i[0]]=list(i[2:])
+	teseu=linha[-2]
+	minotauro=grafh[linha[-3]]
+	minotauroEsta=linha[-3]
+	contador=0
+	saida=[]
+‘’’
+enquanto o monstro tiver caminhos a seguir.
+caso a primeira posição da lista não seja a posição do heroi e nem a onde estão as velas(saida), o heroi vai para a posição do monstro e o monstro anda para a proxima caverna.
+caso possua vela ou esteja o heroi na primeira posição da lista, o monstro pega a proxima caverna disponivel.
+
+‘’’
+	while len(minotauro)!=0:
+		if minotauro[0]!=teseu and minotauro[0] not in saida:
+			teseu=minotauroEsta
+			minotauroEsta=minotauro[0]
+			contador+=1
+			if minotauroEsta in grafh.keys():
+				minotauro=grafh[minotauroEsta]
+			else:
+				minotauro=[]
+			if contador%int(linha[-1])==0:
+				saida.append(teseu)
+				contador=0
+		else:
+			minotauro=minotauro[1:]
+	for i in saida:
+		print(i,end=' ')
+	print('/%s'%minotauroEsta)
+	linha =input().replace(';',' ').replace('.',' ').split()
+print()
