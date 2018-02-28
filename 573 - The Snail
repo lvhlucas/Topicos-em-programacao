@@ -1,0 +1,27 @@
+'''
+é verificado se durante o dia a lesma é capaz de alcançar o topo se não ela escorrega.
+com o passar dos dias a lesma se cansa e com isso sobe por dia cada vez menos se chegar ao ponto de durante o dia não conseguir nada o programa deve mostrar que dia isso aconteçeu.
+'''
+x=input().split()
+while x[0]!='0':
+	altura=int(x[0])
+	dia=int(x[1])
+	noite=int(x[2])
+	taxa=dia*(int(x[3])/100)
+	alturaAtual=dia
+	dia-=taxa
+	contador=1
+	if alturaAtual<=altura:
+		alturaAtual-=noite
+	while alturaAtual>=0 and alturaAtual<=altura:
+		contador+=1
+		if dia>0:
+			alturaAtual+=dia
+			dia-=taxa
+		if alturaAtual<=altura:
+			alturaAtual-=noite
+	if alturaAtual>altura:
+		print('success on day',contador)
+	else:
+		print('failure on day',contador)
+	x=input().split()
