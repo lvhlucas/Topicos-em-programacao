@@ -1,0 +1,49 @@
+
+'''
+é lido o numero de nós e quantidade de arestas respectivamente.
+'''
+nos=int(input())
+while nos!=0:    
+	lista = [0 for i in range(nos)]
+	caminhos={}
+	NumeroAresta=int(input())
+
+	'''
+	é criado dicionário que tem como chave o nó de origem e contudo é colocado uma lista com os nós de destino.
+'''
+	for i in range(NumeroAresta):
+		frase=input().split()
+		if int(frase[0]) not in caminhos.keys():
+			caminhos[int(frase[0])]=[int(frase[1])]
+		else:
+			caminhos[int(frase[0])].append(int(frase[1]))
+
+'''
+utilizando bfs é criado uma fronteira onde é posto o nó 0 e é lhe dado uma cor e uma lista é cria relacionando cor a nó.
+''' 
+	bicolor=True
+	fronteira=[0]   	 
+	lista[0]=1
+'''
+enquanto a fronteira não for vazia.
+utlizando FIFO(first in first out).
+caso o nó tenha aresta(caso não tenho quer dizer que ele ja foi alcançado por outro nó) é percorrido todas as suas arestas.
+caso os nós de destino sejam indeterminados é colocado a cor oposta ao nó de origem e o nó de destino é adicionado na fronteira. 
+caso os nós de origem e destino possuam cor igual o programa determinado que o grafo não é bicoloring. 
+'''
+	while len(fronteira)!=0:
+		if fronteira[0] in caminhos:
+			for i in caminhos[fronteira[0]]:
+				if lista[fronteira[0]]==lista[i]:
+					bicolor=False
+				elif lista[i]==0:
+					lista[i]=lista[fronteira[0]]*-1
+					fronteira.append(i)
+		del fronteira[0]
+	if not bicolor:
+		print("NOT", end=' ')
+	print("BICOLORABLE.")
+'''
+proximo grafo, se no=0 fim do arquivo
+'''
+	nos = int(input())
