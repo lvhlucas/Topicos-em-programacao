@@ -1,0 +1,35 @@
+'''
+utilizando bfs.
+variável matriz possui o mapa a ser vasculhado.
+'''
+contador=0
+while True:
+	try:
+		tamanho=int(input())
+	except:
+		break
+	eagle=0
+	matriz=[]
+	bfs=[]
+	for i in range(tamanho):
+		matriz.append(list(input()))
+
+'''
+varre a matriz procurando ‘1’ caso encontrado é colocado na fronteira para utilizar bfs e encontrar o resto da eagle sendo que após a passagem sobre o local é deixado ‘0’ para que não haja erros seguintes.
+'''
+	for i in range(len(matriz)):
+		for j in range(len(matriz[0])):
+			if matriz[i][j]=='1':
+				eagle+=1
+				bfs.append([i,j])
+				matriz[i][j]='0'
+			while len(bfs)!=0:
+				matriz[bfs[0][0]][bfs[0][1]]=0
+				for x in [-1,0,1]:
+					for y in [-1,0,1]:
+						if bfs[0][0]+x>=0 and bfs[0][0]+x<len(matriz) and bfs[0][1]+y>=0 and bfs[0][1]+y<len(matriz[0]) and matriz[bfs[0][0]+x][bfs[0][1]+y]=='1':
+							bfs.append([bfs[0][0]+x,bfs[0][1]+y])
+							matriz[bfs[0][0]+x][bfs[0][1]+y]='0'
+				del bfs[0]
+	contador+=1
+	print('Image number %d contains %d war eagles.'%(contador,eagle))
