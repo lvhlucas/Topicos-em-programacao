@@ -1,0 +1,36 @@
+‘’’
+utilizando bfs.
+noCopy contém ao final da busca a lista com os nós que não são acessiveis.
+a cada nova busca noCopy é zerado.
+lista contem os nós a serem verificados.
+todo nó verificado é retirado de noCopy.
+‘’’
+import copy
+temp=int(input())
+while temp!=0:    
+	no=[str(i) for i in range(1,temp+1)]
+	vertice={}
+	linha=input().split()
+	while linha[0]!='0':
+    	vertice[linha[0]]=linha[1:-1]
+    	linha=input().split()
+	linha=input().split()
+	for a in linha[1:]:
+    	noCopy=copy.copy(no)
+    	if a in vertice.keys():
+        	lista=copy.copy(vertice[a])
+        	for x in lista:
+            	noCopy.remove(x)
+        	while len(lista)!=0:
+            	if lista[0] in vertice.keys():
+                	for j in vertice[lista[0]]:
+                    	if j not in lista and j in noCopy:
+                        	lista.append(j)
+                        	if j in noCopy:
+                            	noCopy.remove(j)
+            	del lista[0]
+    	print(len(noCopy),end='')
+    	for i in sorted(noCopy):
+        	print('',i,end='')
+    	print()
+	temp=int(input())
