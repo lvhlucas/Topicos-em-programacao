@@ -1,0 +1,66 @@
+‘’’
+jogadas é um lista de tuplas que guardam as posições de forced win de X.
+jogadasInimigas será 1 caso O tenha 3 O seguidos. Forçando X a ganhar em seguida.
+‘’’
+linha=input()
+while linha[0]!='$':
+	matriz=[]
+	jogadas=[]
+	jogadasInimigas=0
+	diagonal=[[],[]]
+	jogadaAdiar=[]
+‘’’
+monta a matriz.
+verifica as linhas para jogadas de X e O e monta as diagonais a serem verificadas.
+jogadaAdiar é uma tupla que contém a primeira posição a ser utilizada por X caso seja necessário.
+‘’’
+	for i in range(4):
+    	aux=list(input())
+    	matriz.append(aux)
+    	diagonal[0].append(aux[i])
+    	diagonal[1].append(aux[3-i])
+    	if aux.count('o')==3 and '.' in aux:
+        	jogadasInimigas=1
+    	if aux.count('x')==3 and '.' in aux:
+        	jogadas.append([i,aux.index('.')])
+    	if '.' in aux and len(jogadaAdiar)==0:
+        	jogadaAdiar.append(i)
+        	jogadaAdiar.append(aux.index('.'))
+‘’’
+verificação das diagonais.
+‘’’
+	for i in range(2):       	 
+    	if diagonal[i].count('x')==3 and '.' in diagonal[i]:
+        	jogadas.append([diagonal[i].index('.'),diagonal[i].index('.')])
+    	if diagonal[i].count('o')==3 and '.' in diagonal[i]:
+            	jogadasInimigas=1
+‘’’
+verificação das colunas.
+‘’’
+	for i in range(4):
+    	aux=[]
+    	for j in range(4):
+        	aux.append(matriz[j][i])
+    	if aux.count('x')==3 and '.' in aux:
+        	jogadas.append([aux.index('.'),i])
+    	if aux.count('o')==3 and '.' in aux:
+        	jogadasInimigas=1
+‘’’
+caso não tenho jogada ganhadora é mostradado #####
+caso só tenha uma jogada ganhodora pra X, ela é mostrada na tela.
+caso tenha 2 jogadas ganhadores mas elas são iguais e mostrado somente uma.
+caso o O tenha 3 posições em seguência é utilizado a primeira jogada ganhadora de X
+caso o O não tenha jogada ganhadora é utilizado a primeira posição livre da matriz.
+‘’’
+	if len(jogadas)==0:
+    	print('#####')
+	elif len(jogadas)==1:
+    	print('(%d,%d)'%(jogadas[0][0],jogadas[0][1]))
+	elif jogadas[0]==jogadas[1]:
+    	print('(%d,%d)'%(jogadas[0][0],jogadas[0][1]))
+	elif jogadasInimigas==1:           	 
+    	print('(%d,%d)'%(jogadas[0][0],jogadas[0][1]))
+	else:
+    	print('(%d,%d)'%(jogadaAdiar[0],jogadaAdiar[1]))
+    	#procurar a primeira posição disponivel e printala
+	linha=input()
