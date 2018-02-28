@@ -1,0 +1,45 @@
+'''
+o auxiliar é inicia com 1.
+alt define o ganhador.
+a lista possui valores que começa com o valor e as posições seguintes são ditas pela seguinte ordem, posição anterior multiplicado por 9 ou 2(começando por 9) alternadamente.
+'''
+lista=[]
+aux=1
+alt=1
+while aux<4294967295:
+    if alt==1:
+   	 aux*=9
+   	 lista.append(aux)
+   	 alt=0
+    else:
+   	 aux*=2
+   	 lista.append(aux)
+   	 alt=1
+'''
+leitura dados.
+a linha armazena o valor a ser atingido ou ultrapassado.
+é procurado em lista o primeiro valor que iguala ou ultrapassa o valor de linha.
+quando encontrado é calculado se é par ou impar.
+caso par stan ganha.
+caso impar ollie ganha
+'''
+linha=int(input())
+while linha:
+    for i in range(len(lista)):
+   	 if linha<=lista[i]:
+   		 if i%2==0:
+   			 ganhou=1
+   		 else:
+   			 ganhou=2
+   		 break
+ 
+    if ganhou==1:
+   	 print('Stan ',end='')
+    else:
+   	 print('Ollie ',end='')
+    print('wins.')
+    try:
+   	 linha=int(input())
+    except:
+   	 break
+
