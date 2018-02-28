@@ -1,0 +1,52 @@
+'''
+condição de parada matriz ter tamanho 0x0.
+'''
+x=input().split()
+while x[0]!='0' or x[1]!='0':
+	qtd=0
+	troca=False
+'''
+toda matriz é ‘’deitada’’ isto é o numero de linha é menor ou igual ou de colunas.
+'''
+	if x[0]!='0' and x[1]!='0':
+		if int(x[0])>int(x[1]):
+			auxiliar=x[1]
+			x[1]=x[0]
+			x[0]=auxiliar
+			troca=True
+'''
+caso linha seja igual 1, o numero de knights é igual a colunas
+'''
+		if x[0]=='1':
+			qtd+=int(x[1])
+		else:
+'''
+caso linha e colunas sejam igual a 2, a quantidade de knights é 4
+'''
+			if x[0]=='2':
+				if x[1]=='2':
+					qtd=4
+				else:
+'''
+caso a quantidade de linhas 2 e colunas maior que 2.
+caso o resto da quantidade de colunas por 4 seja 1 ou 3, a quantidade de knights é colunas+1.
+caso o resto da quantidade de colunas por seja 0, a quantidade de knights é igual a quantidade de colunas.
+finalmente para o resto igual a 0, a quantidade de knights é colunas+2.
+'''
+					if int(x[1])%4==1 or int(x[1])%4==3:
+						qtd=int(x[1])+1
+					else:
+						if int(x[1])%4==0:
+							qtd=int(x[1])
+						else:
+							qtd=int(x[1])+2
+'''
+caso maior que 3 linhas é utilizado a equação a baixo para determinar a quantidade de knights.
+'''
+			else:
+				qtd+=int(((int(x[0])*int(x[1]))+1)/2)
+	if troca:
+		print(int(qtd),'knights may be placed on a',x[1],'row',x[0],'column board.')
+	else:
+		print(int(qtd),'knights may be placed on a',x[0],'row',x[1],'column board.')
+	x=input().split()	
