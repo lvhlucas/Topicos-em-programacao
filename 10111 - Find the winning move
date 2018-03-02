@@ -1,44 +1,41 @@
-'''
-jogadas é um lista de tuplas que guardam as posições de forced win de X.
-jogadasInimigas será 1 caso O tenha 3 O seguidos. Forçando X a ganhar em seguida.
-'''
+
 linha=input()
 while linha[0]!='$':	
-	jogadas=none
+	jogadas=None
 	jogadasInimigas=0
 	diagonal=[[],[]]	
 	colunas=[[],[],[],[]]
-	forcedWin=0
-'''verifica as linhas e colunas para jogadas de X e O e monta as diagonais a serem verificadas.'''
+	forcedWin=[]
 	for i in range(4):
-    		aux=list(input())
+		aux=list(input())
 		diagonal[0].append(aux[i])
-    		diagonal[1].append(aux[3-i])
+		diagonal[1].append(aux[3-i])
 		for j in range(4):
 			colunas[j].append(aux[j])    		
 		if aux.count('o')==3 and '.' in aux:
 			jogadasInimigas=1
 		if aux.count('x')==3 and '.' in aux:
-			forcedWin=1
-		if '.' in aux and jogadas!=none:
+			forcedWin.append([i,aux.index('.')])
+		if '.' in aux and jogadas==None:
 			jogadas=[i,aux.index('.')]		
-'''verifica colunas'''
 	for i in range(4):
-		if colunas[i].count('o')==3 and '.' in aux:
+		if colunas[i].count('o')==3 and '.' in colunas[i]:
 			jogadasInimigas=1
-		if colunas[i].count('x')==3 and '.' in aux:
-			forcedWin=1		
-'''verificação das diagonais.'''
+		if colunas[i].count('x')==3 and '.' in colunas[i]:
+			forcedWin.append([colunas[i].index('.'),i])	
 	for i in [0,1]:       	 
 		if diagonal[i].count('x')==3 and '.' in diagonal[i]:
-			forcedWin=1
+			if i==0:
+				forcedWin.append([diagonal[i].index('.'),diagonal[i].index('.')])
+			else:
+				forcedWin.append([diagonal[i].index('.'),3-diagonal[i].index('.')])
 		if diagonal[i].count('o')==3 and '.' in diagonal[i]:
 			jogadasInimigas=1
-'''caso não tenho jogada ganhadora é mostradado #####
-caso só tenha uma jogada ganhodora pra X, é mostrada a primeira posição livre na matriz.'''
-	if forcedWin==1:
+	if len(forcedWin)!=0:
 		if jogadasInimigas!=1:
-			print('(%d,%d)'%(jogadas[0][0],jogadas[0][1]))
+			print('(%d,%d)'%(jogadas[0],jogadas[1]))
+		else:
+			print('(%d,%d)'%(forcedWin[0][0],forcedWin[0][1]))
 	else:
 		print('#####')
 	linha=input()
