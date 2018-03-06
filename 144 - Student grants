@@ -1,55 +1,35 @@
-'''
-qtdPessoa é um vetor de tamanho a quantidade de alunos e possui em cada campo a quantidade de dinheiro a ser recebido e
-limite guarda a quantidade de dinheiro que é capaz de ser sacado do caixa eletronico.
-ordemSaida contem a ordem que os estudantes conseguirem sacar todo o dinheiro.
-proximoSaque guarda o proximo valor que o caixa permitira ser sacado.
-caixa contem o dinheiro do saque do caixa para ser retirado pelos alunos.
-'''
 auxiliar=input().split()
 while auxiliar[0]!='0' and auxiliar[1]!='0':
-	qtdPessoa=[[40,i+1] for i in range(int(auxiliar[0]))]
+	qtdPessoa=[[40,i] for i in range(int(auxiliar[0]))]
 	limite=int(auxiliar[1])
 	ordemSaida=[]
 	proximoSaque=caixa=1
 	posicao=0
 	while len(qtdPessoa)!=0:
- '''
-enquanto houve aluno a sacar dinheiro.
-se a caixa não tiver nada é realizado um saque.
-o dinheiro sacado e debitado no saldo do estudante.
-'''
-    	if caixa==0:
-        	if proximoSaque>=limite:
-            	proximoSaque=1
-        	else:
-            	proximoSaque+=1
-        	caixa=proximoSaque
- 
-    	saldo=qtdPessoa[posicao][0]-caixa
- '''
-caso o saque do caixa eletronico faça o aluno ficar com saldo negativo, ele somente recebe o suficiente para deixa-lo com saldo 0 e o resto fica disponivel ao proximo aluno.
-'''
-    	if saldo<0:
-        	caixa-=qtdPessoa[posicao][0]
-        	ordemSaida.append(qtdPessoa[posicao][1])
-        	del qtdPessoa[posicao]
-        	posicao-=1
-    	else:
-        	qtdPessoa[posicao][0]-=caixa
-        	caixa=0
-        	if saldo==0:
-            	ordemSaida.append(qtdPessoa[posicao][1])
-            	del qtdPessoa[posicao]
-            	posicao-=1
-    	if posicao+1>=len(qtdPessoa):
-        	posicao=0
-    	else:
-        	posicao+=1
+		if caixa==0:
+			if proximoSaque+1>limite:
+				proximoSaque=1
+			else:
+				proximoSaque+=1
+		caixa=proximoSaque		
+		if qtdPessoa[posicao][0]-caixa<=0:
+			caixa-=qtdPessoa[posicao][0]
+			ordemSaida.append(qtdPessoa[posicao][1])
+			del qtdPessoa[posicao]
+			posicao-=1
+		else:
+			qtdPessoa[posicao][0]-=caixa
+			caixa=0			
+		if posicao+1==len(qtdPessoa):
+			posicao=0
+		else:
+			posicao+=1
 	if len(ordemSaida)!=0:
-    	for i in ordemSaida:
-        	if i>=10:
-            	print('',i,end='')
-        	else:
-            	print(' ',i,end='')
-    	print()
+		for i in ordemSaida:
+			print(' ',end='')
+			if i>=10:
+				print('%d'%(i+1),end='')
+			else:
+				print(' %d'%(i+1),end='')
+	print()
 	auxiliar=input().split()
