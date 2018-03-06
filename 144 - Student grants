@@ -1,6 +1,6 @@
 auxiliar=input().split()
 while auxiliar[0]!='0' and auxiliar[1]!='0':
-	qtdPessoa=[[40,i] for i in range(int(auxiliar[0]))]
+	qtdPessoa=[[40,i+1] for i in range(int(auxiliar[0]))]
 	limite=int(auxiliar[1])
 	ordemSaida=[]
 	proximoSaque=caixa=1
@@ -11,7 +11,7 @@ while auxiliar[0]!='0' and auxiliar[1]!='0':
 				proximoSaque=1
 			else:
 				proximoSaque+=1
-		caixa=proximoSaque		
+			caixa=proximoSaque		
 		if qtdPessoa[posicao][0]-caixa<=0:
 			caixa-=qtdPessoa[posicao][0]
 			ordemSaida.append(qtdPessoa[posicao][1])
@@ -26,10 +26,9 @@ while auxiliar[0]!='0' and auxiliar[1]!='0':
 			posicao+=1
 	if len(ordemSaida)!=0:
 		for i in ordemSaida:
-			print(' ',end='')
 			if i>=10:
-				print('%d'%(i+1),end='')
+				print(' %d'%(i),end='')
 			else:
-				print(' %d'%(i+1),end='')
+				print('  %d'%(i),end='')
 	print()
 	auxiliar=input().split()
