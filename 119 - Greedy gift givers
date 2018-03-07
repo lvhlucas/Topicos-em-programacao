@@ -1,23 +1,9 @@
-''' 
-está dando presentation error, não sei por que está pulando 2 linhas no final ao invez de uma...
-''' 
-''' 
-line possui o numero de pessoas.
-listaNomes possui o nome das pessoas.
-dicPessoaMoney é um dicionário que tem como chave o nome de cada pessoa e valor o ‘’saldo’’ dela.
-''' 
 line=int(input())
 while line>0 and line<=10:    
     dicPessoaMoney={}
     listaNomes=input().split()
     for i in listaNomes:
         dicPessoaMoney[i]=0
-''' 
-como cada pessoa doa algo(mesmo R$00,00).
-é verificado se a pessoa tem algo a doar(diferente de 0) e se não é para ninguem.
-para cada pessoa que teve o nome citado é acrescentado o valor da variavel valor.
-o valor doado tem que ser a divisão inteira, istó é o resto não é doado.
-''' 
     for i in range(len(listaNomes)):
         auxiliar=input().split()
         if int(auxiliar[1])!=0 and int(auxiliar[2])!=0:
@@ -29,8 +15,8 @@ o valor doado tem que ser a divisão inteira, istó é o resto não é doado.
                 dicPessoaMoney[nome]+=valor
     for i in listaNomes:
         print(i,dicPessoaMoney[i])
-    print()   
     try:
     	line=int(input())
+    	print()   
     except:
     	break
